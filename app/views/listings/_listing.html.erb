@@ -1,0 +1,11 @@
+  <span class="user"><%= link_to listing.title, listing %></span>
+  <span class="content">
+    <%= listing.title %>
+    <%= listing.description %>
+    <%= image_tag @listing.picture.url if @listing.picture? %></br>
+    Posted <%= time_ago_in_words(listing.created_at) %> ago.
+    <% if current_user?(listing.user) %>
+      <%= link_to "delete", listing, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+                                       <% end %>
+  </span>

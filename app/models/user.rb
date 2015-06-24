@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
                                    foreign_key: "followed_id",
                                    dependent:   :destroy
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :listings, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -79,9 +80,15 @@ class User < ActiveRecord::Base
 
   # Returns a user's status feed.
   def feed
+    # following_ids_subselect = "SELECT followed_id FROM relationships
+    #                            WHERE  follower_id = :user_id"
+    # Micropost.where("user_id IN (#{following_ids_subselect})
+    #                  OR user_id = :user_id", user_id: id)
+
+
     following_ids_subselect = "SELECT followed_id FROM relationships
                                WHERE  follower_id = :user_id"
-    Micropost.where("user_id IN (#{following_ids_subselect})
+    Listing.where("user_id IN (#{following_ids_subselect})
                      OR user_id = :user_id", user_id: id)
   end
 

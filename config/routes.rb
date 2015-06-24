@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :listings
+  resources :listings, except: [:index]
+  resources :categories, only: [:show]
+
+  # root 'listings#index'
   root                'static_pages#home'
   get    'help'    => 'static_pages#help'
   get    'about'   => 'static_pages#about'
@@ -9,6 +14,7 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   resources :users do
     member do
+      get :listings
       get :following, :followers
     end
   end
