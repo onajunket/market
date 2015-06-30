@@ -2,6 +2,7 @@ class Listing < ActiveRecord::Base
   # attr_accessible :remote_image_url
   belongs_to :user
   belongs_to :category
+  belongs_to :subcategory
   validates :user_id, presence: true
   validates :title, presence: true
   default_scope -> { order('created_at DESC') }

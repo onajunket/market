@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622142847) do
+ActiveRecord::Schema.define(version: 20150630174803) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -24,10 +24,11 @@ ActiveRecord::Schema.define(version: 20150622142847) do
     t.text     "description"
     t.decimal  "price"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "category_id"
     t.string   "picture"
+    t.integer  "subcategory_id"
   end
 
   add_index "listings", ["user_id"], name: "index_listings_on_user_id"
@@ -53,6 +54,13 @@ ActiveRecord::Schema.define(version: 20150622142847) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "subcategories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

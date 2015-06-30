@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   resources :listings
   resources :listings, except: [:index]
-  resources :categories, only: [:show]
+  resources :categories, only: [:show] do
+  resources :subcategories, only: [:show]
+end
 
   # root 'listings#index'
+  get 'static_pages/update_subcategories', :as => 'update_subcategories'
   root                'static_pages#home'
   get    'help'    => 'static_pages#help'
   get    'about'   => 'static_pages#about'

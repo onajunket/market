@@ -8,11 +8,42 @@
         <%= render 'shared/stats' %>
       </section>
       <section class="micropost_form">
-        <%= render 'shared/listing_form' %>
+<%= form_for(@listing) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="form-group">
+    <%= f.collection_select :category_id,  @categories,  :id, :name, {:prompt   => "Select a Category"}, {:id => 'categories_select'} %>
+    </div>
+      <div class="form-group">
+    <%= f.collection_select :subcategory_id, @subcategories, :id, :name, {:prompt   => "Select an Product"}, {:id => 'subcategories_select'} %>
+    </div>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label 'Price (optional)' %>
+    <div class="input-group">
+      <div class="input-group-addon">$</div>
+      <%= f.number_field :price, class: 'form-control', step: 'any', min: 0 %>
+    </div>
+  </div>
+  <div class="form-group">
+    <span class="picture">
+      <%= f.label 'Upload Image (optional)' %>
+      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+  </span>
+  </div>
+  <%= f.submit class: 'btn btn-primary' %>
+  <%= link_to 'Cancel', :back, class: 'btn btn-danger' %>
+<% end %>
       </section>
     </aside>
     <div class="col-md-8">
-      <h3>Micropost Feed</h3>
+      <h3>My Listings</h3>
       <%= render 'shared/feed_list' %>
     </div>
   </div>
@@ -32,3 +63,26 @@
   <%= link_to image_tag("rails.png", alt: "Rails logo"),
               'http://rubyonrails.org' %>
 <% end %>
+
+<script>
+  $(document).ready(function() {
+    $('#categories_select').change(function() {
+      $.ajax({
+        url: "<%= update_subcategories_path %>",
+        data: {
+          category_id : $('#categories_select').val()
+        },
+        dataType: "script"
+      });
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $('#micropost_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>
