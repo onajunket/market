@@ -7,8 +7,16 @@
   <% end %>
 </p>
 <p>
+  <strong>Brand:</strong>
+  <% if @listing.subcategory %>
+    <%= link_to @listing.subcategory.name, @listing.subcategory %>
+  <% else %>
+    none
+  <% end %>
+</p>
+<p>
   <strong>User:</strong>
-  <%= @listing.user.name %>
+  <%= link_to @listing.user.name, @listing.user %>
 </p>
 <p>
   <strong>Title:</strong>

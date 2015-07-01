@@ -13,6 +13,7 @@ class ListingsController < ApplicationController
   # GET /listings/1.json
   def show
     @listing = Listing.find(params[:id])
+    # @user = User.find(params[:id])
   end
 
   # GET /listings/new
