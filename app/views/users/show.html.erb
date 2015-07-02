@@ -4,7 +4,7 @@
     <section class="user_info">
       <h1>
         <%= gravatar_for @user %>
-        <%= @user.name %>
+        <%= @user.company.titleize %>
       </h1>
       <p>
         Tel: <%= number_to_phone @user.telephone %>
