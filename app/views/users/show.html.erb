@@ -6,9 +6,18 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      <p>
+        <%= @user.telephone %>
+      </p>
+      <p>
+        <%= @user.website %>
+      </p>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
+    </section>
+    <section class="user_info">
+      <%= @user.description %>
     </section>
   </aside>
   <div class="col-md-8">

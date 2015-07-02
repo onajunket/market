@@ -13,6 +13,15 @@ class User < ActiveRecord::Base
   before_save   :downcase_email
   before_create :create_activation_digest
   validates :name,  presence: true, length: { maximum: 50 }
+  validates :company,  presence: true, length: { maximum: 150 }
+  validates :telephone,  presence: true, length: { maximum: 50 }
+  validates :address,  presence: true, length: { maximum: 150 }
+  validates :website,  presence: true, length: { maximum: 80 }
+  validates :description,  presence: true, length: { maximum: 1000 }
+  validates :zip,  presence: true, length: { maximum: 50 }
+  validates :country,  presence: true, length: { maximum: 50 }
+  validates :state,  presence: true, length: { maximum: 50 }
+  validates :city,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
