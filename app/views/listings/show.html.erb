@@ -26,6 +26,7 @@
 <p>
   <strong>Description:</strong>
   <%= @listing.description %>
+  Tagged with: <%= raw @listing.tag_list.map { |t| link_to t, tag_path(t)}.join(', ') %>
 </p>
 
 <% if @listing.price %>

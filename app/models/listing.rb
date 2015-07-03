@@ -9,6 +9,7 @@ class Listing < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
   validate  :picture_size
   mount_uploader :picture, PictureUploader
+  acts_as_taggable
 
 private
 

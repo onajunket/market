@@ -1,4 +1,4 @@
-<h1>Listings</h1>
+<h1> Listings </h1>
 
 <% if @listings.empty? %>
   No listings to display! Go <%= link_to 'create one', new_listing_path %>.
@@ -9,9 +9,8 @@
         <tr>
           <td><%= link_to listing.title, listing %></td>
           <td class="text-right">
-            <% if listing.price %>
-              <%= number_to_currency(listing.price) %>
-            <% end %>
+          Tags <%= raw listing.tag_list.map { |t| link_to t, tag_path(t)}.join(', ') %> |
+          Posted <%= time_ago_in_words(listing.created_at) %> ago.
           </td>
         </tr>
       <% end %>

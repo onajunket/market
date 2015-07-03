@@ -7,6 +7,7 @@
         <tr>
           <td><%= link_to listing.title, listing %></td>
           <td class="text-right">
+          Tags <%= raw listing.tag_list.map { |t| link_to t, tag_path(t)}.join(', ') %> |
           Posted <%= time_ago_in_words(listing.created_at) %> ago.
           </td>
         </tr>

@@ -6,7 +6,12 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @listings = Listing.all
+    if params[:tag]
+      @listings = Listing.tagged_with(params[:tag])
+      # @listings = @listing.listings.tagged_with(params[:tag])
+    else
+      @listings = Listing.all
+    end
   end
 
   # GET /listings/1
@@ -23,8 +28,16 @@ class ListingsController < ApplicationController
   # GET /listings/1/edit
   def edit
     @listing = Listing.find(params[:id])
+    @categories  = Category.all
+    @subcategories = Subcategory.all
   end
 
+  def update_categories
+        # updates artists and songs based on genre selected
+    category = Category.find(params[:category_id])
+    # map to name and id for use in our options_for_select
+    @subcategories = category.subcategories.map{|a| [a.name, a.id]}.insert(0, "Select a Product")
+  end
   # POST /listings
   # POST /listings.json
   def create
@@ -71,7 +84,7 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:title, :description, :price, :user_id, :category_id, :subcategory_id, :picture)
+      params.require(:listing).permit(:title, :description, :price, :user_id, :category_id, :subcategory_id, :picture, :tag_list)
     end
 
     def correct_user

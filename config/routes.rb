@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :subcategories, only: [:show]
 
   # root 'listings#index'
+  get 'tags/:tag', to: 'listings#index', as: :tag
   get 'static_pages/update_subcategories', :as => 'update_subcategories'
   root                'static_pages#home'
   get    'help'    => 'static_pages#help'

@@ -12,10 +12,15 @@
     </div>
   <% end %>
   <div class="form-group">
-    <%= f.label :category %>
-    <%= f.collection_select :category_id, Category.all, :id, :name, {
-      include_blank: "Please select..." }, { class: 'form-control' } %>
+    <%= f.collection_select :category_id,  @categories,  :id, :name, {:prompt   => "Select a Category"}, {:id => 'categories_select'} %>
     </div>
+      <div class="form-group">
+    <%= f.collection_select :subcategory_id, @subcategories, :id, :name, {:prompt   => "Select an Product"}, {:id => 'subcategories_select'} %>
+    </div>
+  <div class="form-group">
+    <%= f.label :tag_list, 'Tags (separated by commas).' %>
+    <%= f.text_field :tag_list, :placeholder => 'Galaxy S6, iPhone 6', class: 'form-control' %>
+  </div>
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control' %>
@@ -48,5 +53,23 @@
     if (size_in_megabytes > 5) {
       alert('Maximum file size is 5MB. Please choose a smaller file.');
     }
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    var country = '#categories_select';
+    var subcategories = '#subcategories';
+
+
+    $('#categories_select').change(function() {
+      $.ajax({
+        url: "<%= update_subcategories_path %>",
+        data: {
+          category_id : $('#categories_select').val()
+        },
+        dataType: "script"
+      });
+    });
   });
 </script>
