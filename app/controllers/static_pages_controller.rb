@@ -9,6 +9,7 @@ class StaticPagesController < ApplicationController
     end
       @categories  = Category.all
       @subcategories = Subcategory.all
+      @forums = Forum.all
   end
 
   def update_subcategories

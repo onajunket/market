@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :listings, except: [:index]
   resources :categories, only: [:show]
   resources :subcategories, only: [:show]
+  resources :forums, only: [:show]
 
   # root 'listings#index'
   get 'tags/:tag', to: 'listings#index', as: :tag
