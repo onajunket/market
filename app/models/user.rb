@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  acts_as_messageable
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -39,6 +40,11 @@ class User < ActiveRecord::Base
   # Returns a random token.
   def User.new_token
     SecureRandom.urlsafe_base64
+  end
+
+  #Mailboxer gem email
+  def mailboxer_email(object)
+    email
   end
 
   # Remembers a user in the database for use in persistent sessions.
