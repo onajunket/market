@@ -1,5 +1,4 @@
 class Listing < ActiveRecord::Base
-  # attr_accessible :remote_image_url
   belongs_to :user
   belongs_to :forum
   belongs_to :category

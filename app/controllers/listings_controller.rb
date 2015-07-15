@@ -33,7 +33,7 @@ class ListingsController < ApplicationController
   end
 
   def update_categories
-        # updates artists and songs based on genre selected
+    # updates categories and subcategories based on product type selected
     category = Category.find(params[:category_id])
     # map to name and id for use in our options_for_select
     @subcategories = category.subcategories.map{|a| [a.name, a.id]}.insert(0, "Select a Product")

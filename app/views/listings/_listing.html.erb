@@ -1,3 +1,5 @@
+<li id="micropost-<%= listing.id %>">
+  <%= link_to gravatar_for(listing.user, size: 50), listing.user %>
   <span class="user"><%= link_to listing.title, listing %></span>
   <span class="content">
     <%= listing.title %>
@@ -9,3 +11,4 @@
                                        data: { confirm: "You sure?" } %>
                                        <% end %>
   </span>
+</li>
