@@ -15,47 +15,65 @@
 #              admin: true,
 #              activated:    true,
 #              activated_at: Time.zone.now)
-99.times do |n|
-  name  = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
-  company = "company"
-  address = "address"
-  city = "city"
-  zip = "zip"
-  state = "state"
-  country = "country"
-  telephone = "telephone"
-  description = "description"
-  website = "website"
-  password = "password"
-  User.create!(name:  name,
-               email: email,
-               company: company,
-               address: address,
-               city: city,
-               zip: zip,
-               state: state,
-               country: country,
-               telephone: telephone,
-               description: description,
-               website: website,
-               password:              password,
-               password_confirmation: password,
-               activated:    true,
-               activated_at: Time.zone.now)
+# 99.times do |n|
+#   name  = Faker::Name.name
+#   email = "example-#{n+1}@railstutorial.org"
+#   company = "company"
+#   address = "address"
+#   city = "city"
+#   zip = "zip"
+#   state = "state"
+#   country = "country"
+#   telephone = "telephone"
+#   description = "description"
+#   website = "website"
+#   password = "password"
+#   User.create!(name:  name,
+#                email: email,
+#                company: company,
+#                address: address,
+#                city: city,
+#                zip: zip,
+#                state: state,
+#                country: country,
+#                telephone: telephone,
+#                description: description,
+#                website: website,
+#                password:              password,
+#                password_confirmation: password,
+#                activated:    true,
+#                activated_at: Time.zone.now)
+# end
+
+# # Microposts
+# users = User.order(:created_at).take(6)
+# 50.times do
+#   content = Faker::Lorem.sentence(5)
+#   users.each { |user| user.microposts.create!(content: content) }
+# end
+
+# # Following relationships
+# users = User.all
+# user  = users.first
+# following = users[2..50]
+# followers = users[3..40]
+# following.each { |followed| user.follow(followed) }
+# followers.each { |follower| follower.follow(user) }
+
+require "httparty"
+
+response = HTTParty.get('http://cellularstockpile.com/wp-json/posts?filter[tag]=distributors')
+
+
+
+p = response.each do |ad|
+  if ad.nil?
+    puts "No Ads"
+    next
+  else ad['date']
+    Ad.create(:name => ad['title'], :image => ad['source'])
+  end
 end
 
-# Microposts
-users = User.order(:created_at).take(6)
-50.times do
-  content = Faker::Lorem.sentence(5)
-  users.each { |user| user.microposts.create!(content: content) }
-end
+p p
 
-# Following relationships
-users = User.all
-user  = users.first
-following = users[2..50]
-followers = users[3..40]
-following.each { |followed| user.follow(followed) }
-followers.each { |follower| follower.follow(user) }

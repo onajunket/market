@@ -20,8 +20,7 @@
       <%= f.collection_select :category_id,  @categories,  :id, :name, {:prompt   => "Select a Category"}, {:id => 'categories_select'} %>
     </div>
     <div class="form-group">
-      <%= f.label 'Choose a brand:' %>
-      <%= f.collection_select :subcategory_id, @subcategories, :id, :name, {:prompt   => "Select an Product"}, {:id => 'subcategories_select'} %>
+      <%= f.collection_select :subcategory_id, @subcategories, :id, :name, {:prompt   => "Select a Product"}, {:id => 'subcategories_select'} %>
     </div>
     <div class="form-group">
       <%= f.label :title %>
@@ -77,11 +76,10 @@
 
 <script>
   $(document).ready(function() {
-    var categories = '#categories_select';
-    var subcategories = '#subcategories';
-
+  $('#subcategories_select').hide();
 
     $('#categories_select').change(function() {
+      $('#subcategories_select').show();
       $.ajax({
         url: "<%= update_subcategories_path %>",
         data: {
