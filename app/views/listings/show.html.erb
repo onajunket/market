@@ -31,6 +31,10 @@
   <strong>Tagged with:</strong>
   <%= raw @listing.tag_list.map { |t| link_to t, tag_path(t)}.join(', ') %>
 </p>
+<p>
+  <strong>Contact Seller about "<%= @listing.title %>"</strong></br>
+  <%= link_to "Send message to #{@listing.user.name}", new_message_path(to: @listing.user.id, message: @listing.title), class: 'btn btn-default btn-sm' %>
+</p>
 
 <% if @listing.price %>
   <p>

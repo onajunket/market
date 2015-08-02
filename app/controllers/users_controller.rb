@@ -3,6 +3,7 @@ class UsersController < ApplicationController
                                         :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
+  before_action :buyer_user,     only: [:following]
 
   # def index
   #   @users = User.paginate(page: params[:page])
@@ -14,8 +15,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
-    @micropost = Micropost.new
+    # @microposts = @user.microposts.paginate(page: params[:page])
+    # @micropost = Micropost.new
     @listings = @user.listings.paginate(page: params[:page])
     @listing = Listing.new
     @users = User.all
@@ -94,5 +95,10 @@ class UsersController < ApplicationController
     # Confirms an admin user.
     def admin_user
       redirect_to(root_url) unless current_user.admin?
+    end
+
+    # Confirms a Buyer/
+    def buyer_user
+      redirect_to(root_url) unless current_user?(@user)
     end
 end

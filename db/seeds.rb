@@ -15,6 +15,25 @@
 #              admin: true,
 #              activated:    true,
 #              activated_at: Time.zone.now)
+
+ User.create!(name:  "Example User",
+             email: "pushon@onajunket.com",
+             company: "company",
+             address: "address",
+             city: "city",
+             zip: "zip",
+             state: "state",
+             country: "country",
+             telephone: "telephone",
+             description: "description",
+             website: "website",
+             password:              "foobar",
+             password_confirmation: "foobar",
+             buyer: true,
+             activated:    true,
+             activated_at: Time.zone.now)
+
+
 # 99.times do |n|
 #   name  = Faker::Name.name
 #   email = "example-#{n+1}@railstutorial.org"
@@ -60,20 +79,20 @@
 # following.each { |followed| user.follow(followed) }
 # followers.each { |follower| follower.follow(user) }
 
-require "httparty"
+# require "httparty"
 
-response = HTTParty.get('http://cellularstockpile.com/wp-json/posts?filter[tag]=distributors')
+# response = HTTParty.get('http://cellularstockpile.com/wp-json/posts?filter[tag]=distributors')
 
 
 
-p = response.each do |ad|
-  if ad.nil?
-    puts "No Ads"
-    next
-  else ad['date']
-    Ad.create(:name => ad['title'], :image => ad['source'])
-  end
-end
+# p = response.each do |ad|
+#   if ad.nil?
+#     puts "No Ads"
+#     next
+#   else ad['date']
+#     Ad.create(:name => ad['title'], :image => ad['source'])
+#   end
+# end
 
 p p
 
