@@ -1,4 +1,6 @@
 class ListingsController < ApplicationController
+  load_and_authorize_resource
+  # skip_authorize_resource :only => :create
   # before_action :set_listing, only: [:show, :edit, :update]
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy

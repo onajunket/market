@@ -13,4 +13,15 @@
       <li><a href="http://news.railstutorial.org/">News</a></li>
     </ul>
   </nav>
+
+  <script>
+$(document).ready(function() {
+    setTimeout(function() {
+        $("#fade").fadeOut("slow", function() {
+            $(this).remove();
+        })
+    }, 3500 );
+});
+</script>
 </footer>
+

@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   include SessionsHelper
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
 
     # Confirms a logged-in user.
     def logged_in_user
@@ -12,6 +17,8 @@ class ApplicationController < ActionController::Base
         redirect_to login_url
       end
     end
+
+
 
   # rescue_from ActiveRecord::RecordNotFound do
   #   flash[:warning] = 'Resource not found.'

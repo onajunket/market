@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'cancan'
 gem 'httparty'
 gem 'jquery-turbolinks'
 gem 'compass-rails',           '2.0.4'

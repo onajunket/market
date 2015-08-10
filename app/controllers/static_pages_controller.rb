@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-
+# load_and_authorize_resource
   def home
     if logged_in?
       @micropost = current_user.microposts.build
